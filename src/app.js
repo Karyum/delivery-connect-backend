@@ -12,14 +12,14 @@ app.use(cookieParser());
 app.use(json());
 app.use(urlencoded({ extended: false }));
 
-app.use(
-  cors({
-    optionsSuccessStatus: 200,
-    credentials: true,
-    origin: process.env.ORIGIN.split(',')
-  })
-);
-app.options('*', cors());
+// app.use(
+//   cors({
+//     optionsSuccessStatus: 200,
+//     credentials: true,
+//     origin: process.env.ORIGIN.split(',')
+//   })
+// );
+// app.options('*', cors());
 
 const port = process.env.PORT || 8000;
 
