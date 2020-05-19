@@ -1,0 +1,46 @@
+{
+  "name": "wajjbat-backend",
+  "version": "1.0.0",
+  "description": "an api for the business owners in the culinary industry platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/run-server.js",
+    "dev": "nodemon src/run-server.js",
+    "build:db": "node src/database/run-es6.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FACN7/wajjbat-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FACN7/wajjbat-backend/issues"
+  },
+  "homepage": "https://github.com/FACN7/wajjbat-backend#readme",
+  "dependencies": {
+    "@babel/core": "^7.8.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.0",
+    "@babel/plugin-transform-runtime": "^7.8.0",
+    "@babel/preset-env": "^7.8.2",
+    "@babel/register": "^7.8.0",
+    "@babel/runtime": "^7.8.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.14.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^2.0.1"
+  }
+}
