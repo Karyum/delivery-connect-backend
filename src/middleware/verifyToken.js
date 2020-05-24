@@ -1,7 +1,7 @@
 import { verify } from 'jsonwebtoken';
 import User from '../queries/User';
 
-export default function (returnData = false) {
+export default function (role, returnData = false) {
   return (req, res, next) => {
     if (req.cookies.wajjbat_access_token) {
       verify(req.cookies.wajjbat_access_token, process.env.JWT_SECRET, async (err, authData) => {
