@@ -1,5 +1,3 @@
-import Auth from './auth.controller';
+import _Auth from './auth.controller';
 
-export default {
-  Auth
-};
+export const Auth = _Auth;

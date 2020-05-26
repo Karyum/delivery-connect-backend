@@ -13,9 +13,9 @@ app.use(urlencoded({ extended: false }));
 
 app.use(cors({ origin: true }));
 
-app.options('*', cors());
+// app.options('*', cors());
 
-app.use('auth', authRouter);
+app.use('/auth', authRouter);
 
 const port = process.env.PORT || 8000;
 

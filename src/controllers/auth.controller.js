@@ -1,37 +1,36 @@
-// use these functions to manipulate our database
-const { findByUsername, addNewUser } = require('../models/users/User.model');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { findUser } from '../models/User.model';
 
 // This function handles the POST /addUser route
 // checks if the password and confirmPassword are equal if not send back
 // a proper error message
 // hash the password, then add the new user to our database using the v addNewUser method
 // make sure to handle any error that might occured
-exports.addUser = (req, res) => {
-  const { password, username, confirmPassword } = req.body;
+// exports.addUser = (req, res) => {
+//   const { password, username, confirmPassword } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.send({ status: 'error' });
-  }
+//   if (password !== confirmPassword) {
+//     return res.status(401).send({ status: 'error' });
+//   }
 
-  bcrypt.hash(password, 10, async (err, hash) => {
-    if (err) {
-      return res.send({ status: 'error' });
-    }
+//   bcrypt.hash(password, 10, async (err, hash) => {
+//     if (err) {
+//       return res.status(401).send({ status: 'error' });
+//     }
 
-    try {
-      await addNewUser(username, hash);
+//     try {
+//       await addNewUser(username, hash);
 
-      res.redirect('/login');
-    } catch (error) {
-      res.render('register', {
-        activePage: { register: true },
-        error: error.message
-      });
-    }
-  });
-};
+//       res.redirect('/login');
+//     } catch (error) {
+//       res.render('register', {
+//         activePage: { register: true },
+//         error: error.message
+//       });
+//     }
+//   });
+// };
 
 // this function handles the POST /authenticate route
 // it finds the user in our database by his username that he inputed
@@ -43,31 +42,35 @@ exports.authenticate = async (req, res) => {
   try {
     const { password, phone } = req.body;
 
-    const user = await findByUsername(phone);
+    const user = await findUser(phone);
 
     bcrypt.compare(password, user.password, function (err, result) {
       if (err) {
-        return res.send({ status: 'error' });
+        console.log('Bcrypt error:', err);
+        return res.status(401).send({ status: 'error' });
       }
 
       if (!result) {
-        return res.send({ status: 'error' });
+        console.log('Bcrypt response is empty');
+        return res.status(401).send({ status: 'error' });
       }
 
       jwt.sign(user.phone, process.env.JWT_SECRET, function (err, token) {
         if (err) {
-          return res.send({ status: 'error' });
+          console.log('JWT sign error:', err);
+          return res.status(401).send({ status: 'error' });
         }
 
-        res.status(200).send({
-          token
-          // unique id
-          // and more user data
-        });
+        delete user.password;
+
+        res
+          .status(200)
+          .send({ token, user, status: 'success', userAuthentication: true });
       });
     });
   } catch (error) {
-    return res.send({ status: 'error' });
+    console.log(error);
+    return res.status(401).send({ status: 'error' });
   }
 };
 

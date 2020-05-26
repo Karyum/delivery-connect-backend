@@ -1,5 +1,3 @@
-import authRouter from './auth.router';
+import _authRouter from './auth.router';
 
-export default {
-  authRouter
-};
+export const authRouter = _authRouter;
