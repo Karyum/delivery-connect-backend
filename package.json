@@ -34,7 +34,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.14.0",
-    "pg-promise": "^10.5.6"
+    "pg-promise": "^10.5.6",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
