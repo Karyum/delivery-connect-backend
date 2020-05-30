@@ -11,13 +11,33 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+const deliveries = {};
+
 io.on('connection', function (socket) {
-  console.log('a user connected');
+  console.log('conneted');
+
+  let id;
+
+  try {
+    id = socket.handshake.query.id;
+  } catch (error) {
+    socket.disconnect();
+  }
+
+  socket.on('locationChange', ({ data }) => {
+    console.log('data incoming');
+    // console.log(data);
+    deliveries[id] = data;
+  });
+
+  socket.on('disconnect', () => {
+    delete deliveries[id];
+  });
 });
 
-setInterval(() => {
-  io.emit('ping', { data: (new Date()) / 1 });
-}, 2000);
+// setInterval(() => {
+//   io.emit('ping', { data: (new Date()) / 1 });
+// }, 2000);
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
