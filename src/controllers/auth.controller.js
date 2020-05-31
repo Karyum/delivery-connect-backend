@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import Redis from 'redis';
 import { findUser } from '../models/User.model';
+import { keysAsync, getAsync } from '../database/redis';
 
 // This function handles the POST /addUser route
 // checks if the password and confirmPassword are equal if not send back
@@ -76,5 +78,15 @@ exports.authenticate = async (req, res) => {
 
 exports.logout = (req, res, next) => {
   // impelemnt
-  next();
+  res.send('helloz');
+};
+
+exports.sendCoords = async (req, res) => {
+  const coords = await getAsync(1);
+
+  const keys = await keysAsync('*');
+  console.log(coords);
+  const parsedCoords = JSON.parse(coords);
+
+  res.send([parsedCoords]);
 };
