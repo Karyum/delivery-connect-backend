@@ -26,8 +26,6 @@ const deliveries = {
   }
 };
 
-// client.subscribe('coordinates');
-//
 io.on('connection', function (socket) {
   console.log('conneted');
   // socket.disconnect();
@@ -65,22 +63,6 @@ io.on('connection', function (socket) {
   //   delete deliveries[id];
   // });
 });
-
-// function sendTheFuckingLocation (location) {
-//   io.broa.emit('pong', {
-//     data: {
-//       data: location
-//     }
-//   });
-// }
-// client.on('change', (channel, message) => {
-//   console.log(message);
-
-//   io.emit('ping');
-// });
-// setInterval(() => {
-//   io.emit('ping', { data: (new Date()) / 1 });
-// }, 2000);
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
