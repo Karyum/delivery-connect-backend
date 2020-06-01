@@ -25,7 +25,7 @@ INSERT INTO users (phone, password, email, role, device_id) VALUES
     '0543198211', 
     '$2b$10$7cNGQVRiflCCDmVxTKk4Eu52Jf5DVakSLyRL1xS7BFoOFzXIXuYp2', 
     'mario.saliba98@gmail.com', 
-    'owner', 
+    'manager', 
     '1iv263ecxtsds');
 
 COMMIT;
