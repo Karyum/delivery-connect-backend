@@ -23,7 +23,7 @@ io.on('connection', async function (socket) {
 
       socket.on('locationChange', async function ({ data }) {
         try {
-          await setAsync(id, JSON.stringify(data));
+          await setAsync(id, JSON.stringify({ ...data, id }));
           socket.in(id).broadcast.emit('updateLocation', { ...data });
         } catch (err) {
           console.log(err);
