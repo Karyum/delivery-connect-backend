@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import Redis from 'redis';
 import { findUser } from '../models/User.model';
 import { keysAsync, getAsync } from '../database/redis';
 
@@ -84,8 +83,6 @@ exports.logout = (req, res, next) => {
 exports.sendCoords = async (req, res) => {
   const coords = await getAsync(1);
 
-  const keys = await keysAsync('*');
-  console.log(coords);
   const parsedCoords = JSON.parse(coords);
 
   res.send([parsedCoords]);
