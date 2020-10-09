@@ -13,8 +13,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
 io.on('connection', async function (socket) {
-  console.log('conneted');
-  // socket.disconnect();
+
   try {
     const { id, type } = socket.handshake.query;
 
